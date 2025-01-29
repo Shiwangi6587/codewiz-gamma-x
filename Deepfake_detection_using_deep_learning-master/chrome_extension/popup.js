@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             (results) => {
                 if (chrome.runtime.lastError || !results || results.length === 0 || !results[0].result) {
+                    console.error("Error executing script:", chrome.runtime.lastError);
                     selectedTextArea.value = "No text selected.";
                 } else {
                     selectedTextArea.value = results[0].result;
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     });
 
-    // Check the news with the Django backend
+    // Check news with the Django backend
     checkButton.addEventListener("click", async () => {
         const newsText = selectedTextArea.value.trim();
 
@@ -35,14 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            // Update the URL to point to the Django backend
             const response = await fetch("http://127.0.0.1:8000/verify_news/", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ news_title: newsText }),
             });
+
+            if (!response.ok) {
+                throw new Error(`Server responded with status: ${response.status}`);
+            }
 
             const data = await response.json();
             resultDiv.innerHTML = ""; // Clear previous results
@@ -77,5 +79,16 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error connecting to the backend:", error);
             resultDiv.innerHTML = `<p style='color:red;'>Error: Unable to connect to the backend.</p>`;
         }
+    });
+
+    // "Go to Dashboard" Button Click Handler
+    document.getElementById("redirectDashboard").addEventListener("click", function () {
+        chrome.runtime.sendMessage({ action: "openDashboard" }, function (response) {
+            if (chrome.runtime.lastError) {
+                console.error("Error sending message to background.js:", chrome.runtime.lastError);
+            } else {
+                console.log("Message sent to background.js to open dashboard.");
+            }
+        });
     });
 });

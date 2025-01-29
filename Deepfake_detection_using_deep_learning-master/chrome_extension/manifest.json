@@ -3,31 +3,32 @@
   "name": "Fake News & Deepfake Checker",
   "version": "1.0",
   "description": "Check whether selected news is fake and upload videos for deepfake detection.",
-  
   "permissions": [
     "tabs",
     "activeTab",
     "scripting",
-    "storage"
+    "storage",
+    "contextMenus"
   ],
-
   "host_permissions": [
-    "http://127.0.0.1:8000/*"  // Change to your Django API URL
+    "http://127.0.0.1:8000/*"
   ],
-
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
-
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon.png"
   },
-
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
     }
   ]
 }
