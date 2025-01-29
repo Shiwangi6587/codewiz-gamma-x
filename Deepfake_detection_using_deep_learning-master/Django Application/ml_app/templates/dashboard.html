@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Fake News Detection Dashboard</h1>
+    <p>Total Checks: {{ total_checks }}</p>
+    <p>Fake News Detected: {{ fake_news_detected }}</p>
+    <p>Real News Detected: {{ real_news_detected }}</p>
+    
+    <h2>Pie Chart</h2>
+    <img src="data:image/png;base64,{{ pie_chart }}" alt="Pie Chart">
+
+    <h2>Heatmap</h2>
+    <img src="data:image/png;base64,{{ heatmap_chart }}" alt="Heatmap">
+</body>
+</html>

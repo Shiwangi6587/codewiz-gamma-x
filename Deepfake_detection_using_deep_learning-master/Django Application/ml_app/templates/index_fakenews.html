@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Fake News Detector</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'ml_app:fake_news' %}">Fake News Detection</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'ml_app:deepfake' %}">Deepfake Detection</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'ml_app:dashboard' %}">Dashboard</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container mt-5">
+    <header>
+        <h1>Fake News Detector</h1>
+    </header>
+    <div class="container">
+        <h2>Check News Authenticity</h2>
+        <form action="{% url 'ml_app:verify_news' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="news_title" placeholder="Enter news title or claim..." required>
+            <button type="submit" class="btn btn-primary">Verify</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
