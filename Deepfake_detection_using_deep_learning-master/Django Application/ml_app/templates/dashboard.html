@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; background: #f4f7f6; color: #333; text-align: center; padding: 30px;">
+
+    <!-- Dashboard Title -->
+    <h1 style="font-size: 2.5rem; color: #007bff; margin-bottom: 20px;">Fake News Detection Dashboard</h1>
+
+    <!-- Stats Box -->
+    <div
+        style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); display: inline-block; width: 80%; max-width: 600px; margin-bottom: 30px;">
+        <p style="font-size: 1.3rem; font-weight: bold; margin-bottom: 10px;">Total Checks: <span
+                style="color: #ff9800;">{{ total_checks }}</span></p>
+        <p style="font-size: 1.3rem; font-weight: bold; color: red; margin-bottom: 10px;">Fake News Detected: {{
+            fake_news_detected }}</p>
+        <p style="font-size: 1.3rem; font-weight: bold; color: green;">Real News Detected: {{ real_news_detected }}</p>
+    </div>
+
+    <!-- Pie Chart -->
+    <h2 style="font-size: 2rem; color: #555;">News Classification Pie Chart</h2>
+    <img src="data:image/png;base64,{{ pie_chart }}" alt="Pie Chart"
+        style="width: 80%; max-width: 500px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); margin-bottom: 30px;">
+
+    <!-- Heatmap -->
+    <h2 style="font-size: 2rem; color: #555;">Detection Heatmap</h2>
+    <img src="data:image/png;base64,{{ heatmap_chart }}" alt="Heatmap"
+        style="width: 80%; max-width: 500px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+</body>
+
+</html>
